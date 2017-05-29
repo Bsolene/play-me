@@ -1,0 +1,49 @@
+<h1>My profil</h1>
+
+<% if @user.picture_url %>
+  <%= cl_image_tag(@user.picture_url.path, width: 200, height: 300, crop: :fill) %>
+<% else %>
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :picture_url, as: :attachinary %>
+    <%= f.button :submit %>
+  <% end %>
+<% end %>
+<%= link_to 'Delete', method: :delete %>
+
+<% if @user.username %>
+  <%= @user.username %>
+<% else %>
+ <%= simple_form_for @user do |f| %>
+    <%= f.input :username %>
+    <%= f.button :submit %>
+  <% end %>
+<% end %>
+
+<%= @user.email %>
+
+
+
+<h3>My games</h3>
+
+<ul>
+  <% @user.games.each do |game| %>
+    <li><%= game.name %> | <%= game.stake %>
+      <ul>
+        <% game.challenges.each do |challenge| %>
+          <li> <%= challenge.user.email %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+
+
+<p><% @user.challenges.each do |challenge| %>
+  <%= challenge.starts_at %>
+<% end %>
+
+</p>
+
+
+<%= link_to 'Home', root_path %>
