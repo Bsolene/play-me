@@ -6,13 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>playME</title>
+    <link rel="shortcut icon" href="<%= image_path 'favicon.png' %>">
 
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
   </head>
   <body>
-    <%= render 'navbar' %>
+    <%= render 'layouts/navbar' %>
     <%= yield %>
     <%= javascript_include_tag 'application' %>
     <%= cloudinary_js_config %>
