@@ -1,138 +1,247 @@
 
-<h1>My profile</h1>
+<div class="wrap-flex">
 
+  <div class="wrap-picture">
+      <% if @user.picture_url %>
+        <%= cl_image_tag(@user.picture_url.path, crop: :fill, :class => "avatar-xlarge") %>
+      <% end %>
 
-<div class="wrap-picture">
+    <!-- MODAL FOR PICTURE -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-picture">Change picture</button>
 
-    <% if @user.picture %>
-      <%= cl_image_tag(@user.picture.path, crop: :fill, :class => "avatar-large") %>
-    <% end %>
-
-  <!-- MODAL FOR PICTURE -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-picture">Change picture</button>
-
-  <div class="modal fade" id="change-picture" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="change-picture">Change picture</h4>
-          <div class="modal-body">
-            <%= simple_form_for @user do |f| %>
-              <%= f.input :picture, as: :attachinary, method: :patch %>
-              <%= f.button :submit %>
-            <% end %>
+    <div class="modal fade" id="change-picture" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="change-picture">Change picture</h4>
+            <div class="modal-body">
+              <%= simple_form_for @user do |f| %>
+                <%= f.input :picture_url, as: :attachinary, method: :patch %>
+                <%= f.button :submit %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<!-- // -->
-</div>
-
-<div class="wrap-username">
-  <h4>
-    <% if @user.username %>
-      <%= @user.username %>
-    <% end %>
-  </h4>
-  <!-- MODAL FOR USERNAME -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-username">Change Username</button>
-
-  <div class="modal fade" id="change-username" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="change-username">Change Username</h4>
-          <div class="modal-body">
-            <%= simple_form_for @user do |f| %>
-              <%= f.input :username, method: :patch %>
-              <%= f.button :submit %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- // -->
+  </div>
+
+  <div class="wrap-infos">
+    <div class="flex-row">
+      <h4>
+        <% if @user.username %>
+          <%= @user.username %>
+        <% end %>
+      </h4>
+      <!-- MODAL FOR USERNAME -->
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#change-username">Change Username</button>
+
+      <div class="modal fade" id="change-username" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="change-username">Change Username</h4>
+              <div class="modal-body">
+                <%= simple_form_for @user do |f| %>
+                  <%= f.input :username, method: :patch %>
+                  <%= f.button :submit %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- // -->
+    <div class="flex-row">
+      <h5><%= @user.email %></h5>
+      <%= link_to 'Reset', edit_user_registration_path %>
+    </div>
+  </div>
+  <div class="wrap-money">
+    My account : $$$$
+  </div>
+
 </div>
-
-<p><%= @user.email %></p>
-
-
  <!-- GAMES BOARD -->
+<div class="container text-center padded">
 
-<h3>My games</h3>
+  <div class="btn btn-success">SCHEDULE</div>
 
-<h4>PENDING</h4>
+  <h4>PENDING</h4>
 
-<ul>
-  <% @user.games.each do |game| %>
-    <% game.challenges.each do |challenge| %>
+    <% @user.games.each do |game| %>
+      <% game.challenges.each do |challenge| %>
+        <% if challenge.accepted == nil %>
+          <div class="list-items">
+            <div class="list-stake">
+              <%= game.stake %> £
+            </div>
+            <div class="list-content">
+              <%= game.name %>
+            </div>
+            <span class="divider"></span>
+            <div class="list-content">
+              Creator:</br> YOU
+            </div>
+            <div class="list-date">
+              <%= challenge.starts_at %>
+            </div>
+            <div class="list-content">
+              Challenger:</br> <%= challenge.user.username %>
+            </div>
+            <div class="list-accept">
+              <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
+              <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="list-decline">
+              <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
+                <i class="fa fa-times fa-lg"></i>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% @user.challenges.each do |challenge| %>
       <% if challenge.accepted == nil %>
-        <li>
-          <%= game.stake %> £ | <%= game.name %> | Creator: YOU | Challenger: <%= challenge.user.username %> | <%= link_to 'Accept', user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch %>
-          <%= link_to 'Decline', user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch %>
-        </li>
+        <div class="list-items">
+          <div class="list-stake">
+            <%= challenge.game.stake %> £
+          </div>
+          <div class="list-content">
+            <%= challenge.game.name %>
+          </div>
+          <div class="list-content">
+            Creator:</br> <%= challenge.game.user.username %>
+          </div>
+          <div class="list-date">
+            <%= challenge.starts_at %>
+          </div>
+          <div class="list-content">
+            Challenger:</br> YOU
+          </div>
+          <div class="list-status">
+            Pending
+          </div>
+        </div>
       <% end %>
     <% end %>
-  <% end %>
-  <% @user.challenges.each do |challenge| %>
-    <% if challenge.accepted == nil %>
-      <li>
-        <%= challenge.game.stake %> £ | <%= challenge.game.name %> | Creator: <%= challenge.game.user.username %> | Challenger: YOU | Pending
-      </li>
+
+
+  <h4 class="title-green">TO PLAY</h4>
+
+
+    <% @user.games.each do |game| %>
+      <% game.challenges.each do |challenge| %>
+        <% if challenge.accepted == true %>
+          <div class="list-items">
+            <div class="list-stake-blue">
+              <%= game.stake %> £
+            </div>
+            <div class="list-content">
+              <%= game.name %>
+            </div>
+            <div class="list-content">
+              Creator:</br> YOU
+            </div>
+            <div class="list-date-blue">
+              <%= challenge.starts_at %>
+            </div>
+            <div class="list-content">
+              Challenger:</br> <%= challenge.user.username %>
+            </div>
+            <div class="list-score">
+              Enter score
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
-
-<h4>TO PLAY</h4>
-
-<ul>
-  <% @user.games.each do |game| %>
-    <% game.challenges.each do |challenge| %>
+    <% @user.challenges.each do |challenge| %>
       <% if challenge.accepted == true %>
-        <li>
-          <%= game.stake %> £ | <%= game.name %> | Creator: YOU | Challenger: <%= challenge.user.username %> | Accepted
-
-        </li>
+        <div class="list-items">
+          <div class="list-stake-blue">
+            <%= challenge.game.stake %> £
+          </div>
+          <div class="list-content">
+            <%= challenge.game.name %>
+          </div>
+          <div class="list-content">
+            Creator:</br> <%= challenge.game.user.username %>
+          </div>
+          <div class="list-date-blue">
+            <%= challenge.starts_at %>
+          </div>
+          <div class="list-content">
+            Challenger:</br> YOU
+          </div>
+          <div class="list-score">
+            Enter score
+          </div>
+        </div>
       <% end %>
     <% end %>
-  <% end %>
-  <% @user.challenges.each do |challenge| %>
-    <% if challenge.accepted == true %>
-      <li>
-        <%= challenge.game.stake %> £ | <%= challenge.game.name %> | Creator: <%= challenge.game.user.username %> | Challenger: YOU | Accepted
 
-      </li>
+
+  <h4 class="title-red">REJECTED</h4>
+
+
+    <% @user.games.each do |game| %>
+      <% game.challenges.each do |challenge| %>
+        <% if challenge.accepted == false %>
+          <div class="list-items">
+            <div class="list-stake">
+              <%= game.stake %> £
+            </div>
+            <div class="list-content">
+              <%= game.name %>
+            </div>
+            <div class="list-content">
+              Creator:</br> YOU
+            </div>
+            <div class="list-date">
+              <%= challenge.starts_at %>
+            </div>
+            <div class="list-content">
+              Challenger:</br> <%= challenge.user.username %>
+            </div>
+            <div class="list-decline">
+              Rejected
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
-
-<h4>REJECTED</h4>
-
-<ul>
-  <% @user.games.each do |game| %>
-    <% game.challenges.each do |challenge| %>
+    <% @user.challenges.each do |challenge| %>
       <% if challenge.accepted == false %>
-        <li>
-          <%= game.stake %> £ | <%= game.name %> | Creator: YOU | Challenger: <%= challenge.user.username %> | Rejected
-
-        </li>
+        <div class="list-items">
+          <div class="list-stake">
+            <%= challenge.game.stake %> £
+          </div>
+          <div class="list-content">
+            <%= challenge.game.name %>
+          </div>
+          <div class="list-content">
+            Creator:</br> <%= challenge.game.user.username %>
+          </div>
+          <div class="list-date">
+            <%= challenge.starts_at %>
+          </div>
+          <div class="list-content">
+            Challenger:</br> YOU
+          </div>
+          <div class="list-decline">
+            Rejected
+          </div>
+        </div>
       <% end %>
     <% end %>
-  <% end %>
-  <% @user.challenges.each do |challenge| %>
-    <% if challenge.accepted == false %>
-      <li>
-        <%= challenge.game.stake %> £ | <%= challenge.game.name %> | Creator: <%= challenge.game.user.username %> | Challenger: YOU | Rejected
 
-      </li>
-    <% end %>
-  <% end %>
-</ul>
-
+</div>
 <!-- // -->
 
-<%= link_to 'Home', root_path %>
