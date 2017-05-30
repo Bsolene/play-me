@@ -29,11 +29,3 @@ module PlayMe
     # -- all .rb files in that directory are automatically loaded.
   end
 end
-
-development:
-  FB_ID: "1363780467034632"
-  FB_SECRET: "575dd4f2da4f4461a245e75df202ad71"
-
-production:
-  FB_ID: "431355847248799"
-  FB_SECRET: "75ff5e607e04542d9f3faf16a61c9e8f"
