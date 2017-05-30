@@ -2,8 +2,8 @@
 
 
   <%= simple_form_for @game do |f| %>
-    <%= f.input :name, collection: Game::TITLES %>
+    <%= f.input :name, collection: Game::TITLES, label: 'Game' %>
     <%= f.input :stake %>
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn-success' %>
   <% end %>
 
