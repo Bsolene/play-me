@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :games
   has_many :challenges#, through: :games
-  has_attachment :picture_url
+  has_attachment :picture
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]

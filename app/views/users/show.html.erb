@@ -4,8 +4,8 @@
 
 <div class="wrap-picture">
 
-    <% if @user.picture_url %>
-      <%= cl_image_tag(@user.picture_url.path, crop: :fill, :class => "avatar-large") %>
+    <% if @user.picture %>
+      <%= cl_image_tag(@user.picture.path, crop: :fill, :class => "avatar-large") %>
     <% end %>
 
   <!-- MODAL FOR PICTURE -->
@@ -19,7 +19,7 @@
           <h4 class="modal-title" id="change-picture">Change picture</h4>
           <div class="modal-body">
             <%= simple_form_for @user do |f| %>
-              <%= f.input :picture_url, as: :attachinary, method: :patch %>
+              <%= f.input :picture, as: :attachinary, method: :patch %>
               <%= f.button :submit %>
             <% end %>
           </div>
