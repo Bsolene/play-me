@@ -1,11 +1,21 @@
+<!-- PAGE TITLE -->
+<% content_for(:title_tag) do %>
+  <% if @user.username %>
+    <%= @user.username %>
+  <% else %>
+    My profile
+  <% end %>
+<% end %>
+<!-- // -->
+
 <h1>My profil</h1>
 
 <div class="wrap-picture">
-  <div class="img-circle">
+
     <% if @user.picture_url %>
-      <%= cl_image_tag(@user.picture_url.path, width: 200, height: 300, crop: :fill) %>
+      <%= cl_image_tag(@user.picture_url.path, crop: :fill, :class => "avatar-large") %>
     <% end %>
-  </div>
+
   <!-- MODAL FOR PICTURE -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-picture">Change picture</button>
 
@@ -59,41 +69,78 @@
 <p><%= @user.email %></p>
 
 
-
+ <!-- GAMES BOARD -->
 
 <h3>My games</h3>
 
+<h4>PENDING</h4>
+
 <ul>
   <% @user.games.each do |game| %>
-    <li><%= game.name %> | <%= game.stake %>
-      <ul>
-        <% game.challenges.each do |challenge| %>
-          <li> ID :<%= challenge.id %> | <%= challenge.user.email %> |
-          <% if challenge.accepted == nil %>
-            <%= link_to 'Accept', user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch %>
-            <%= link_to 'Decline', user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch %>
-          <% else %>
-            <%= challenge.accepted %>
-          <% end %>
-          </li>
-        <% end %>
-      </ul>
-    </li>
+    <% game.challenges.each do |challenge| %>
+      <% if challenge.accepted == nil %>
+        <li>
+          <%= game.stake %> £ | <%= game.name %> | Creator: YOU | Challenger: <%= challenge.user.username %> | <%= link_to 'Accept', user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch %>
+          <%= link_to 'Decline', user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch %>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% @user.challenges.each do |challenge| %>
+    <% if challenge.accepted == nil %>
+      <li>
+        <%= challenge.game.stake %> £ | <%= challenge.game.name %> | Creator: <%= challenge.game.user.username %> | Challenger: YOU | Pending
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
+<h4>TO PLAY</h4>
 
 <ul>
+  <% @user.games.each do |game| %>
+    <% game.challenges.each do |challenge| %>
+      <% if challenge.accepted == true %>
+        <li>
+          <%= game.stake %> £ | <%= game.name %> | Creator: YOU | Challenger: <%= challenge.user.username %> | Accepted
+
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
   <% @user.challenges.each do |challenge| %>
-    <li>ID :<%= challenge.id %> | <%= challenge.starts_at %> | <%= challenge.user.email %> |
-    <% if challenge.accepted == nil %>
-      Pending
-    <% else %>
-      <%= challenge.accepted %>
-      <% end %></li>
+    <% if challenge.accepted == true %>
+      <li>
+        <%= challenge.game.stake %> £ | <%= challenge.game.name %> | Creator: <%= challenge.game.user.username %> | Challenger: YOU | Accepted
+
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
+<h4>REJECTED</h4>
 
+<ul>
+  <% @user.games.each do |game| %>
+    <% game.challenges.each do |challenge| %>
+      <% if challenge.accepted == false %>
+        <li>
+          <%= game.stake %> £ | <%= game.name %> | Creator: YOU | Challenger: <%= challenge.user.username %> | Rejected
+
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% @user.challenges.each do |challenge| %>
+    <% if challenge.accepted == false %>
+      <li>
+        <%= challenge.game.stake %> £ | <%= challenge.game.name %> | Creator: <%= challenge.game.user.username %> | Challenger: YOU | Rejected
+
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<!-- // -->
 
 <%= link_to 'Home', root_path %>
