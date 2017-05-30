@@ -1,12 +1,17 @@
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
 
-<h1>playME logo here</h1>
 
-<h2>play your favourite games against players around the world
-but this time, there’s money on it</h2>
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path 'banner-background.jpg' %>);">
+  <div class="banner-content">
+    <p class="alert"><%= alert %></p>
+    <p class="notice"><%= notice %></p>
+    <%= image_tag 'playME-logo.png', width: "230" %>
+    <h2><span class="first-line">play your favourite games against players around the world</span></h2>
+    <h2>but this time, there’s money on it</h2>
+    <%= link_to 'start a game', new_game_path, class: "btn btn-green" %>
+  </div>
+</div>
 
 
 
@@ -18,8 +23,6 @@ but this time, there’s money on it</h2>
 
 
 
-<%= link_to 'NEW', new_game_path %>
-
 <% if user_signed_in? %>
-<%= link_to 'My Profil', user_path(current_user) %>
+<%= link_to 'My Profile', user_path(current_user) %>
 <% end %>

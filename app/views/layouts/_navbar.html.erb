@@ -1,7 +1,7 @@
 <div class="navbar-wagon hidden-xs hidden-sm">
   <!-- Logo -->
   <a href="/" class="navbar-wagon-brand">
-    <%= cl_image_tag("playME-logo_gil74m.png") %>
+    <%= image_tag 'playME-logo.png' %>
   </a>
 
   <form action="search" class="navbar-wagon-search text-center">
@@ -11,12 +11,6 @@
     </button>
   </form>
 
-  <div class="link-title">
-  <%= link_to new_user_registration_path do %>
-    <span>sign</span><span>up</span>
-  <% end %>
-  </div>
-
   <% if user_signed_in? %>
     <div class="link-title">
       <%= link_to destroy_user_session_path, method: :delete do %>
@@ -25,10 +19,16 @@
     </div>
   <% else %>
     <div class="link-title">
+      <%= link_to new_user_registration_path do %>
+        <span>sign</span><span>up</span>
+      <% end %>
+    </div>
+    <div class="link-title">
       <%= link_to user_session_path do %>
         <span>log</span><span>in</span>
       <% end %>
     </div>
+
   <% end %>
 </div>
 
