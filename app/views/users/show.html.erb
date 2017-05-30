@@ -68,7 +68,13 @@
     <li><%= game.name %> | <%= game.stake %>
       <ul>
         <% game.challenges.each do |challenge| %>
-          <li> <%= challenge.user.email %></li>
+          <li> ID :<%= challenge.id %> | <%= challenge.user.email %> |
+          <% if challenge.accepted == nil %>
+            <%= link_to 'Accept', user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch %>
+          <% else %>
+            <%= challenge.accepted %>
+          <% end %>
+          </li>
         <% end %>
       </ul>
     </li>
@@ -76,12 +82,17 @@
 </ul>
 
 
+<ul>
+  <% @user.challenges.each do |challenge| %>
+    <li>ID :<%= challenge.id %> | <%= challenge.starts_at %> | <%= challenge.user.email %> |
+    <% if challenge.accepted == nil %>
+      Pending
+    <% else %>
+      <%= challenge.accepted %>
+      <% end %></li>
+  <% end %>
+</ul>
 
-<p><% @user.challenges.each do |challenge| %>
-  <%= challenge.starts_at %> | <%= challenge.user.email %> | <%= challenge.accepted %>
-<% end %>
-
-</p>
 
 
 <%= link_to 'Home', root_path %>

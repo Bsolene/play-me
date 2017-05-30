@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :set_challenge, only: []
+  before_action :set_challenge, only: [:mark_as_accepted]
   before_action :set_game, only: [:create]
 
   def create
@@ -11,6 +11,11 @@ class ChallengesController < ApplicationController
     else
       render "games/show"
     end
+  end
+
+  def mark_as_accepted
+    @challenge.update(accepted: true)
+    redirect_to :back
   end
 
 

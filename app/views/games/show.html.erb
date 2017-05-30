@@ -8,8 +8,11 @@
 
 <h4>Challenge me !</h4>
 
-
-<%= simple_form_for [@game, @challenge] do |f| %>
-  <%= f.input :starts_at %>
-  <%= f.button :submit %>
+<% if current_user != @game.user %>
+  <%= simple_form_for [@game, @challenge] do |f| %>
+    <%= f.input :starts_at %>
+    <%= f.button :submit %>
+  <% end %>
 <% end %>
+
+<%= link_to 'Home', root_path %>
