@@ -61,7 +61,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :picture_url, :stake)
+    params.require(:game).permit(:name, :picture, :stake)
   end
 
 end
