@@ -1,0 +1,29 @@
+<h1>Home</h1>
+
+<%= link_to 'Signup', new_user_registration_path %>
+<%= link_to 'login', user_session_path %>
+<%= link_to 'Logout', destroy_user_session_path, method: :delete  %>
+
+
+<h4>Search bar</h4>
+
+<form action="search">
+  <input type="text" name="name" placeholder="Search something">
+  <button type="submit">
+    <i class="fa fa-search"></i>
+  </button>
+</form>
+
+<ul>
+  <% @games.each do |game| %>
+    <li> <%= link_to game.name, game_path(game) %></li>
+  <% end %>
+</ul>
+
+
+
+<%= link_to 'NEW', new_game_path %>
+
+<% if user_signed_in? %>
+<%= link_to 'My Profil', user_path(current_user) %>
+<% end %>

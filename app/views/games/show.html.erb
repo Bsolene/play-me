@@ -1,0 +1,15 @@
+
+<h3><%= @user %></h3>
+
+
+<%= @game.name %> | <%= @game.stake %>
+
+
+
+<h4>Challenge me !</h4>
+
+
+<%= simple_form_for [@game, @challenge] do |f| %>
+  <%= f.input :starts_at %>
+  <%= f.button :submit %>
+<% end %>

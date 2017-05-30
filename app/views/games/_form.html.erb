@@ -1,0 +1,9 @@
+
+
+
+  <%= simple_form_for @game do |f| %>
+    <%= f.input :name, collection: Game::TITLES %>
+    <%= f.input :stake %>
+    <%= f.button :submit %>
+  <% end %>
+
