@@ -1,0 +1,44 @@
+.modal-content {
+  border-radius: 9px;
+}
+
+.close {
+  margin-top: 1px;
+  margin-right: 1px;
+}
+
+.modal-banner {
+  text-align: center;
+  height: 26vh;
+  /* if you have a 70px navbar => height: calc(100vh - 70px); */
+  background-size: cover !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 0px;
+}
+
+.modal-header {
+  color: #6AA881;
+  background-color: #6FFFA4;
+  border: none;
+  border-radius: 5px 5px 0px 0px;
+  text-align: center;
+  padding: 6px;
+}
+
+.modal-title {
+  font-family: Phosphate Solid;
+  font-size: 35px;
+}
+
+.game-info {
+  margin: 320px;
+}
+
+.modal-footer {
+  text-align: center;
+}
