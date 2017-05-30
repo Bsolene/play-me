@@ -1,51 +1,63 @@
 <h1>My profil</h1>
 
-<% if @user.picture_url %>
-  <%= cl_image_tag(@user.picture_url.path, width: 200, height: 300, crop: :fill) %>
-<% else %>
-  <%= simple_form_for @user do |f| %>
-    <%= f.input :picture_url, as: :attachinary %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
+<div class="wrap-picture">
+  <div class="img-circle">
+    <% if @user.picture_url %>
+      <%= cl_image_tag(@user.picture_url.path, width: 200, height: 300, crop: :fill) %>
+    <% end %>
+  </div>
+  <!-- MODAL FOR PICTURE -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-picture">Change picture</button>
 
-<!-- MODAL -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="change-picture">Change picture</button>
-
-<div class="modal fade" id="change-picture" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="change-picture">Change picture</h4>
-        <div class="modal-body">
-          <%= simple_form_for @user do |f| %>
-            <%= f.input :picture_url, as: :attachinary, method: :patch %>
-            <%= f.button :submit %>
-          <% end %>
+  <div class="modal fade" id="change-picture" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="change-picture">Change picture</h4>
+          <div class="modal-body">
+            <%= simple_form_for @user do |f| %>
+              <%= f.input :picture_url, as: :attachinary, method: :patch %>
+              <%= f.button :submit %>
+            <% end %>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Change</button>
-      </div>
       </div>
     </div>
   </div>
-</div>
 <!-- // -->
+</div>
 
+<div class="wrap-username">
+  <h4>
+    <% if @user.username %>
+      <%= @user.username %>
+    <% end %>
+  </h4>
+  <!-- MODAL FOR USERNAME -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-username">Change Username</button>
 
+  <div class="modal fade" id="change-username" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="change-username">Change Username</h4>
+          <div class="modal-body">
+            <%= simple_form_for @user do |f| %>
+              <%= f.input :username, method: :patch %>
+              <%= f.button :submit %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- // -->
+</div>
 
-<% if @user.username %>
-  <%= @user.username %>
-<% else %>
- <%= simple_form_for @user do |f| %>
-    <%= f.input :username %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
+<p><%= @user.email %></p>
 
-<%= @user.email %>
 
 
 
@@ -66,7 +78,7 @@
 
 
 <p><% @user.challenges.each do |challenge| %>
-  <%= challenge.starts_at %>
+  <%= challenge.starts_at %> | <%= challenge.user.email %> | <%= challenge.accepted %>
 <% end %>
 
 </p>
