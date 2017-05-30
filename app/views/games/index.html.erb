@@ -1,7 +1,4 @@
 
-
-
-
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.6) 0%, rgba(0,36,61,0.6) 50%), url(<%= image_path 'banner-background.jpg' %>);">
   <div class="banner-content">
     <p class="alert"><%= alert %></p>
@@ -12,17 +9,18 @@
     <%= link_to 'start a game', new_game_path, class: "btn btn-green" %>
   </div>
 </div>
-
-
-
-<ul>
+<div class="flex-between flex-wrap">
   <% @games.each do |game| %>
-    <li> <%= link_to game.name, game_path(game) %></li>
+    <%= link_to game_path(game), class: 'home-card', style: game.picture? ? "background-image: url(#{cl_image_path game.picture.path})" : "" do %>
+    <%= cl_image_tag game.user.picture.path, class: "card-user avatar" %>
+    <p class="card-game"><span class="card-game-user"><%= game.user.username %></span> wants to play <br><span class="card-game-name"><%= game.name %></p>
+    <span class="card-stake"><%= game.stake %></span>
+    <% end %>
   <% end %>
-</ul>
+</div>
 
 
 
-<% if user_signed_in? %>
-<%= link_to 'My Profile', user_path(current_user) %>
-<% end %>
+<%# if user_signed_in? %>
+<%# link_to 'My Profile', user_path(current_user) %>
+<%# end %>
