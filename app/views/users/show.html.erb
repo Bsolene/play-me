@@ -71,6 +71,7 @@
           <li> ID :<%= challenge.id %> | <%= challenge.user.email %> |
           <% if challenge.accepted == nil %>
             <%= link_to 'Accept', user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch %>
+            <%= link_to 'Decline', user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch %>
           <% else %>
             <%= challenge.accepted %>
           <% end %>
