@@ -51,9 +51,10 @@
 
 /* Navbar search form */
 .navbar-wagon-search {
-  flex: 0 1 300px;
+  flex-basis: 66%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   padding: 0 10px;
   position: relative;
 }
@@ -62,9 +63,9 @@
   color: $light-grey;
   border: none;
   background: transparent;
-  position: absolute;
-  right: 14px;
-  top: -2px;
+  position: relative;
+  right: 26px;
+  top: 1px;
   z-index: 1;
 }
 .navbar-wagon-search-input {
