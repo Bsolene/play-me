@@ -8,7 +8,33 @@
     <%= f.button :submit %>
   <% end %>
 <% end %>
-<%= link_to 'Delete', method: :delete %>
+
+<!-- MODAL -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="change-picture">Change picture</button>
+
+<div class="modal fade" id="change-picture" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="change-picture">Change picture</h4>
+        <div class="modal-body">
+          <%= simple_form_for @user do |f| %>
+            <%= f.input :picture_url, as: :attachinary, method: :patch %>
+            <%= f.button :submit %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Change</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- // -->
+
+
 
 <% if @user.username %>
   <%= @user.username %>
