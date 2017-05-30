@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show, :update] do
     patch '/mark-as-accepted', to: 'challenges#mark_as_accepted'
+    patch '/decline', to: 'challenges#decline'
   end
   get 'search', to: 'games#search'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
