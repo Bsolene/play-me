@@ -1,10 +1,10 @@
 /* Main class */
 .navbar-wagon {
   box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
-  background: white;
+  background: $grey;
   transition: all 0.3s ease;
   display: flex;
-  height: 70px;
+  height: 34px;
   padding: 0px 30px;
   align-items: center;
   justify-content: space-between;
@@ -48,55 +48,41 @@
   text-decoration: none;
 }
 
-/* Navbar right button */
-.navbar-wagon-button {
-  margin-left: 10px;
-  padding: 0 20px;
-  border-radius: 20em;
-  line-height: 40px;
-  background-color: #D23333;
-  color: white;
-  font-size: 14px;
-  border: 2px solid #D23333;
-}
-.navbar-wagon-button:hover {
-  color: white;
-  background: #D23333;
-  border-color: #ac2626;
-}
 
 /* Navbar search form */
 .navbar-wagon-search {
-  flex: 0 1 300px;
+  flex-basis: 66%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   padding: 0 10px;
   position: relative;
 }
 .navbar-wagon-search-btn {
-  line-height: 40px;
-  color: #E6E6E6;
+  line-height: 28px;
+  color: $light-grey;
   border: none;
   background: transparent;
-  position: absolute;
-  right: 14px;
-  top: -2px;
+  position: relative;
+  right: 26px;
+  top: 1px;
   z-index: 1;
 }
 .navbar-wagon-search-input {
   flex: 0 1 300px;
   transition: all 0.15s ease;
-  line-height: 40px;
+  line-height: 25px;
   font-weight: lighter;
-  color: #666666;
-  border: 1px solid #E6E6E6;
+  color: $light-grey;
+  background-color: $grey;
+  border: 1px solid $light-grey;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: 0 80px;
   font-size: 14px;
   outline: none;
 }
 .navbar-wagon-search-input:focus  {
-  border: 1px solid #CCCCCC;
+  border: 1px solid $light-grey;
 }
 
 /* Navbar dropdown menu */
@@ -129,3 +115,32 @@
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
 }
+
+
+.link-title {
+  span:first-child {
+    text-decoration: none;
+    color: $light-grey;
+  }
+  span:last-child {
+    text-decoration: none;
+    color: $green;
+    }
+  &:hover {
+    span:first-child {
+      text-decoration: none;
+      color: $green;
+    }
+    span:last-child {
+      text-decoration: none;
+      color: $light-grey;
+    }
+  }
+}
+
+
+
+
+
+
+
