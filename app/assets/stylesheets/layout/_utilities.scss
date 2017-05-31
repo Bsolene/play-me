@@ -35,6 +35,10 @@ h1 {
 h2 {
   color: $green;
 }
+h4 {
+  color: $light-grey;
+}
+
 // Flexbox
 .flex-between {
   display: flex;
@@ -45,6 +49,12 @@ h2 {
   display: flex;
   flex-wrap: wrap;
 }
-h4 {
-  color: $light-grey;
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flex-row{
+  display:flex;
+  align-items: center;
 }
