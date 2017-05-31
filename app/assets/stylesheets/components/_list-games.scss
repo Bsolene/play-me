@@ -108,16 +108,30 @@
   flex: 0 0 100px;
   color: $light-grey;
 }
-//SHADOW
+//SHADOWS
 .box-shadow-grey{
   box-shadow: 3px 3px 0px 0px rgba(216,216,216,0.75);
 }
+.box-shadow-grey-right{
+  box-shadow: inset -3px -3px 0px 0px rgba(135,135,135,1);
+}
 .box-shadow-red{
-
+  box-shadow: inset 3px -3px 0px 0px rgba(209,91,73,1);
+}
+.box-shadow-red-right{
+  box-shadow: inset -3px -3px 0px 0px rgba(209,91,73,1);
 }
 .box-shadow-blue{
   box-shadow: inset 3px -3px 0px 0px rgba(99,159,178,1);
 }
+.box-shadow-blue-right{
+  box-shadow: inset -3px -3px 0px 0px rgba(99,159,178,1);
+}
+.box-shadow-green-right{
+  box-shadow: inset -3px -3px 0px 0px rgba(95,206,135,1);
+}
+
+
 // TITLES
 .title-green{
   color: $green;
