@@ -1,6 +1,4 @@
 
-
-
   <%= simple_form_for @game do |f| %>
     <%= f.input :name, collection: Game::GAMES.keys.sort, label: 'Game' %>
     <%= f.input :stake %>
