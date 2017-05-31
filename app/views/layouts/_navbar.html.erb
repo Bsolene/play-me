@@ -4,14 +4,19 @@
     <%= image_tag 'playME-logo.png' %>
   </a>
 
-  <form action="search" class="navbar-wagon-search text-center">
-    <input type="text" name="name" class="navbar-wagon-search-input" placeholder="search for a game">
+  <%= form_tag games_path, method: :get, class: "navbar-wagon-search text-center" do %>
+    <%= text_field_tag :name, nil, class: "navbar-wagon-search-input", placeholder: "search for a game" %>
     <button type="submit" class="navbar-wagon-search-btn">
       <i class="fa fa-search"></i>
     </button>
-  </form>
+  <% end %>
 
   <% if user_signed_in? %>
+    <div class="link-title">
+      <%= link_to user_path(current_user) do %>
+        <span>pro</span><span>file</span>
+      <% end %>
+    </div>
     <div class="link-title">
       <%= link_to destroy_user_session_path, method: :delete do %>
         <span>log</span><span>out</span>
