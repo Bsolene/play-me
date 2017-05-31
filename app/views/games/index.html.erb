@@ -14,12 +14,46 @@
     <div class="no-game-msg text-center"><h2>no live games for that search - why not start your own?</h2></div>
   <% else %>
     <% @games.each do |game| %>
-      <%= link_to game_path(game), class: 'home-card', style: "background-image: linear-gradient(-225deg, rgba(67,67,67,0.2) 0%, rgba(0,36,61,0.2) 50%), url(#{image_path game.picture_file_name})" do %>
-        <% avatar_url = current_user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
+
+      <div data-toggle="modal" data-target="#<%= game.id %>" class= 'home-card', style= "background-image: linear-gradient(-225deg, rgba(67,67,67,0.2) 0%, rgba(0,36,61,0.2) 50%), url(<%= image_path game.picture_file_name %>)">
+        <% avatar_url = game.user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
         <%= image_tag avatar_url, class: "card-user avatar" %>
         <p class="card-game"><span class="card-game-user"><%= game.user.username %></span> wants to play<br><span class="card-game-name"><%= game.name %></p>
         <span class="card-stake">£<%= game.stake %></span>
-      <% end %>
+      </div>
+      <!-- BOOKING MODAL-->
+      <div class="modal fade" id="<%= game.id %>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">$ <%= game.stake %> STAKE</h4>
+            </div>
+            <div class="modal-body">
+              <div class="modal-banner" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path game.picture_file_name %>');">
+                <h1><%= game.name %></h1>
+              </div>
+              <div class="game-info">
+                <div>
+                  <% avatar_url = game.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                  <%= image_tag avatar_url, class: "avatar-xlarge" %>
+                </div>
+                <div>
+                  <h4 class="modal-username"><%= game.user.username %></h4>
+                  <p>Challenge this player</p>
+                  <p>When would you like to play?</p>
+                </div>
+                <div class="booking-form">
+                  <%= simple_form_for [game, @challenge] do |f| %>
+                    <%= f.input :starts_at %>
+                    <%= f.button :submit %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   <% end %>
 </div>
