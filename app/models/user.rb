@@ -8,6 +8,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   validates :username, uniqueness: true
+  before_create :asign_username
+
+
 
   def challenges_as_game_owner
     Challenge.where(game: games)
@@ -32,5 +35,11 @@ class User < ApplicationRecord
     end
 
     return user
+  end
+
+  private
+
+  def asign_username
+    self.username = self.first_name
   end
 end
