@@ -83,8 +83,8 @@
   flex: 0 0 150px;
   font-size: 12px;
 }
-.list-date-challenge{
-  background-color: $medium-grey;
+.list-date-blue-challenge{
+  background-color: $blue;
   height: 50px;
   flex: 0 0 180px;
   color: $light-grey;
@@ -103,15 +103,21 @@
   a{color: $light-grey;}
 }
 .list-score-challenge{
-  background-color: $blue;
+  background-color: $green;
   height: 30px;
   flex: 0 0 100px;
   color: $light-grey;
 }
+//SHADOW
+.box-shadow-grey{
+  box-shadow: 3px 3px 0px 0px rgba(216,216,216,0.75);
+}
+.box-shadow-red{
 
-
-
-
+}
+.box-shadow-blue{
+  box-shadow: inset 3px -3px 0px 0px rgba(99,159,178,1);
+}
 // TITLES
 .title-green{
   color: $green;
@@ -119,7 +125,7 @@
 .title-red{
   color: $red;
 }
-h4:before, h4:after {
+.title:before, .title:after {
   content:'';
   width:5em;
   border-bottom:1px $light-grey solid;
@@ -140,9 +146,9 @@ h4:before, h4:after {
   display:inline-block;
   vertical-align:middle;
 }
-h4:before {
+.title:before {
   margin-left:-100%;
 margin-right:2em}
-h4:after {
+.title:after {
   margin-right:-100%;
 margin-left:2em;}
