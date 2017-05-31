@@ -24,13 +24,25 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">$10 STAKE</h4>
+          <h4 class="modal-title">$ <%= game.stake %> STAKE</h4>
         </div>
         <div class="modal-body">
-          <div class="modal-banner" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path 'banner-background.jpg' %>');">
+          <div class="modal-banner" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path '<%= Game.picture_file_name%>' %>');">
           </div>
           <div class="game-info">
-
+            <div>
+              <% avatar_url = game.user.facebook_picture_url || "http://placehold.it/30x30" %>
+              <%= image_tag avatar_url, class: "avatar-xlarge" %>
+            </div>
+            <div>
+              <h4><%= game.user.username %></h4>
+              <p>Challenge this player</p>
+              <p>When would you like to play?</p>
+            </div>
+              <%= simple_form_for game.challenges do |f| %>
+                <%= f.input :starts_at, method: :patch %>
+                <%= f.button :submit %>
+              <% end %>
           </div>
         </div>
         <div class="modal-footer">
