@@ -3,11 +3,15 @@ class GamesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :search, :show]
 
   def search
-    @games = Game.where(name: params[:name])
+
   end
 
   def index
-    @games = Game.all
+    if params[:name].blank?
+      @games = Game.all
+    else
+      @games = Game.where("name iLIKE ?", "%#{params[:name]}%")
+    end
     @user = current_user
   end
 
