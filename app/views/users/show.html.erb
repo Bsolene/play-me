@@ -2,47 +2,21 @@
 <div class="flex-row wrap-white">
 
   <div>
-    <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+    <% avatar_url = current_user.facebook_picture_url || "https://unsplash.it/100/100/?random" %>
     <%= image_tag avatar_url, class: "avatar-xlarge" %>
   </div>
 
   <div class="wrap-infos">
-    <div class="flex-row">
-      <h4>
-        <% if @user.username %>
-          <%= @user.username %>
-        <% end %>
-      </h4>
-      <!-- MODAL FOR USERNAME -->
-      <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#change-username">Change Username</button>
 
-      <div class="modal fade" id="change-username" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="change-username">Change Username</h4>
-              <div class="modal-body">
-                <%= simple_form_for @user do |f| %>
-                  <%= f.input :username, method: :patch %>
-                  <%= f.button :submit %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- // -->
-    <div class="flex-row">
-      <h5><%= @user.email %></h5>
-      <%= link_to 'Reset', edit_user_registration_path %>
-    </div>
-  </div>
-  <div class="wrap-money">
+    <h3><%= @user.username %></h3>
+    <h5><%= @user.email %></h5>
+    <%= link_to 'Reset', edit_user_registration_path %>
+
+ <!--  <div class="wrap-money">
     My account : $$$$
-  </div>
+  </div> -->
 
+  </div>
 </div>
  <!-- GAMES BOARD -->
 <div class="container text-center padded">
@@ -61,20 +35,21 @@
 
 <!-- MY GAMES SECTION-->
 
-  <div class="tab-content hidden" id="games">
+  <div class="tab-content hidden " id="games">
 
     <% @user.games.each do |game| %>
           <div class="list-items">
-            <div class="list-stake">
+            <div class="list-stake flex-row-center">
               <%= game.stake %> £
             </div>
-            <div class="list-game"  style="background-image: url( <%= image_path game.picture_file_name %> )">
+            <div class="list-game flex-row-center"  style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.3) 0%, rgba(0,36,61,0.3) 50%), url( <%= image_path game.picture_file_name %> )">
               <%= game.name %>
 
             </div>
-            <div class="list-status">
+            <div class="list-status flex-row-center">
                 Pending
             </div>
+            <%= link_to 'delete', game_path(game), method: :delete %>
           </div>
         <% game.challenges.each do |challenge| %>
           <% if challenge.accepted == nil %>
@@ -112,27 +87,27 @@
         <% game.challenges.each do |challenge| %>
           <% if challenge.accepted == nil %>
             <div class="list-items">
-              <div class="list-stake">
+              <div class="list-stake flex-row-center">
                 <%= game.stake %> £
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 <%= game.name %>
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 Creator:</br> YOU
               </div>
-              <div class="list-date">
+              <div class="list-date flex-row-center">
                 <%= challenge.starts_at %>
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 Challenger:</br> <%= challenge.user.username %>
               </div>
-              <div class="list-accept">
+              <div class="list-accept flex-row-center">
                 <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
                 <i class="fa fa-check fa-lg" aria-hidden="true"></i>
                 <% end %>
               </div>
-              <div class="list-decline">
+              <div class="list-decline flex-row-center">
                 <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
                   <i class="fa fa-times fa-lg"></i>
                 <% end %>
@@ -144,22 +119,22 @@
       <% @user.challenges.each do |challenge| %>
         <% if challenge.accepted == nil %>
           <div class="list-items">
-            <div class="list-stake">
+            <div class="list-stake flex-row-center">
               <%= challenge.game.stake %> £
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               <%= challenge.game.name %>
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               Creator:</br> <%= challenge.game.user.username %>
             </div>
-            <div class="list-date">
+            <div class="list-date flex-row-center">
               <%= challenge.starts_at %>
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               Challenger:</br> YOU
             </div>
-            <div class="list-status">
+            <div class="list-status flex-row-center">
               Pending
             </div>
           </div>
@@ -172,22 +147,22 @@
         <% game.challenges.each do |challenge| %>
           <% if challenge.accepted == true %>
             <div class="list-items">
-              <div class="list-stake-blue">
+              <div class="list-stake-blue flex-row-center">
                 <%= game.stake %> £
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 <%= game.name %>
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 Creator:</br> YOU
               </div>
-              <div class="list-date-blue">
+              <div class="list-date-blue flex-row-center">
                 <%= challenge.starts_at %>
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 Challenger:</br> <%= challenge.user.username %>
               </div>
-              <div class="list-score">
+              <div class="list-score flex-row-center">
                 Enter score
               </div>
             </div>
@@ -197,22 +172,22 @@
       <% @user.challenges.each do |challenge| %>
         <% if challenge.accepted == true %>
           <div class="list-items">
-            <div class="list-stake-blue">
+            <div class="list-stake-blue flex-row-center">
               <%= challenge.game.stake %> £
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               <%= challenge.game.name %>
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               Creator:</br> <%= challenge.game.user.username %>
             </div>
-            <div class="list-date-blue">
+            <div class="list-date-blue flex-row-center">
               <%= challenge.starts_at %>
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               Challenger:</br> YOU
             </div>
-            <div class="list-score">
+            <div class="list-score flex-row-center">
               Enter score
             </div>
           </div>
@@ -225,22 +200,22 @@
         <% game.challenges.each do |challenge| %>
           <% if challenge.accepted == false %>
             <div class="list-items">
-              <div class="list-stake">
+              <div class="list-stake flex-row-center">
                 <%= game.stake %> £
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 <%= game.name %>
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 Creator:</br> YOU
               </div>
-              <div class="list-date">
+              <div class="list-date flex-row-center">
                 <%= challenge.starts_at %>
               </div>
-              <div class="list-content">
+              <div class="list-content flex-row-center">
                 Challenger:</br> <%= challenge.user.username %>
               </div>
-              <div class="list-status-red">
+              <div class="list-status-red flex-row-center">
                 Rejected
               </div>
             </div>
@@ -250,22 +225,22 @@
       <% @user.challenges.each do |challenge| %>
         <% if challenge.accepted == false %>
           <div class="list-items">
-            <div class="list-stake">
+            <div class="list-stake flex-row-center">
               <%= challenge.game.stake %> £
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               <%= challenge.game.name %>
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               Creator:</br> <%= challenge.game.user.username %>
             </div>
-            <div class="list-date">
+            <div class="list-date flex-row-center">
               <%= challenge.starts_at %>
             </div>
-            <div class="list-content">
+            <div class="list-content flex-row-center">
               Challenger:</br> YOU
             </div>
-            <div class="list-status-red">
+            <div class="list-status-red flex-row-center">
               Rejected
             </div>
           </div>

@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update]
+  before_action :set_game, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :search, :show]
 
   def search
@@ -45,10 +45,10 @@ class GamesController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     if current_user == @game.user
       @game.destroy
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
     else
       redirect_to root_path
     end

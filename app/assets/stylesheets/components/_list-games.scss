@@ -1,7 +1,11 @@
 .list-game{
+  color: $light-grey;
+  font-size: 20px;
   height: 70px;
   flex: 0 0 400px;
-  background-position: cover !important;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .list-items{
   display: flex;
