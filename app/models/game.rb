@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
   belongs_to :user
-  has_many :challenges
+  has_many :challenges, dependent: :destroy
 
   GAMES = {
     'Fifa 17' => "fifa-banner-2.jpg",
