@@ -7,6 +7,7 @@ class GamesController < ApplicationController
   end
 
   def index
+    @challenge = Challenge.new
     if params[:name].blank?
       @games = Game.all
     else
