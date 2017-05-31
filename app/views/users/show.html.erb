@@ -2,7 +2,7 @@
 <div class="flex-row wrap-white">
 
   <div>
-    <% avatar_url = current_user.facebook_picture_url || "https://unsplash.it/100/100/?random" %>
+    <% avatar_url = current_user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
     <%= image_tag avatar_url, class: "avatar-xlarge" %>
   </div>
 
@@ -21,7 +21,7 @@
  <!-- GAMES BOARD -->
 <div class="container text-center padded">
 
-  <div class="tabs">
+  <div class="tabs padding-bottom">
     <a class="tab btn btn-success" data-target="#games">
       MY GAMES
     </a>
@@ -52,24 +52,30 @@
             <%= link_to 'delete', game_path(game), method: :delete %>
           </div>
         <% game.challenges.each do |challenge| %>
-          <% if challenge.accepted == nil %>
+          <% if challenge.accepted != false %>
             <div class="list-items">
-              <div class="list-content">
-                Challenger:</br> <%= challenge.user.username %>
+              <div class="list-content-challenge flex-row-center">
+                Challenger: <%= challenge.user.username %>
               </div>
-              <div class="list-date">
+              <div class="list-date-challenge flex-row-center">
                 <%= challenge.starts_at %>
               </div>
-              <div class="list-accept">
-                <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
-                <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+              <% if challenge.accepted == nil %>
+                <div class="list-accept-challenge flex-row-center">
+                  <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
+                  <i class="fa fa-check " aria-hidden="true"></i>
+                  <% end %>
+                </div>
+                <div class="list-decline-challenge flex-row-center">
+                  <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
+                    <i class="fa fa-times "></i>
+                  <% end %>
+                </div>
+                <% elsif challenge.accepted == true %>
+                  <div class="list-score-challenge flex-row-center">
+                    Enter score
+                  </div>
                 <% end %>
-              </div>
-              <div class="list-decline">
-                <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
-                  <i class="fa fa-times fa-lg"></i>
-                <% end %>
-              </div>
             </div>
           <% end %>
         <% end %>
