@@ -4,7 +4,7 @@ class Game < ApplicationRecord
   has_attachment :picture
 
   GAMES = {
-    'Fifa17' => "fifa-banner-2.jpg",
+    'Fifa 17' => "fifa-banner-2.jpg",
     'Madden 17' => "madden-17.jpg",
     'NBA 2K17' => "nba-card.jpg",
     'Tekken 7' => "tekken-card.jpg",
