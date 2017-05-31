@@ -1,31 +1,9 @@
 
-<div class="wrap-flex">
+<div class="flex-row wrap-white">
 
-  <div class="wrap-picture">
-      <% if @user.picture_url %>
-        <%= cl_image_tag(@user.picture_url.path, crop: :fill, :class => "avatar-xlarge") %>
-      <% end %>
-
-    <!-- MODAL FOR PICTURE -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#change-picture">Change picture</button>
-
-    <div class="modal fade" id="change-picture" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="change-picture">Change picture</h4>
-            <div class="modal-body">
-              <%= simple_form_for @user do |f| %>
-                <%= f.input :picture_url, as: :attachinary, method: :patch %>
-                <%= f.button :submit %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <!-- // -->
+  <div>
+    <% avatar_url = current_user.facebook_picture_url || "http://placehold.it/30x30" %>
+    <%= image_tag avatar_url, class: "avatar-xlarge" %>
   </div>
 
   <div class="wrap-infos">
@@ -90,8 +68,9 @@
             <div class="list-stake">
               <%= game.stake %> £
             </div>
-            <div class="list-game">
+            <div class="list-game"  style="background-image: url( <%= image_path game.picture_file_name %> )">
               <%= game.name %>
+
             </div>
             <div class="list-status">
                 Pending
