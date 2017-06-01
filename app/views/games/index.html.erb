@@ -48,13 +48,13 @@
                   </div>
                 </div>
                 <div style="overflow:hidden;">
-                    <div class="form-group">
-                      <% if game.user == current_user %>
-                      <% else %>
-                        <%= simple_form_for [game, @challenge] do |f| %>
-                          <input class="datetimepicker12" type="hidden" name="challenge[starts_at]">
-                          <%= f.button :submit, class: 'btn-green create-challenge' %>
-                        <% end %>
+                  <div class="modal-form-group">
+                    <% if game.user == current_user %>
+                    <% else %>
+                      <%= simple_form_for [game, @challenge] do |f| %>
+                        <input class="datetimepicker12" type="hidden" name="challenge[starts_at]">
+                        <%= f.button :submit, class: 'btn-green create-challenge' %>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>
