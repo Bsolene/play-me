@@ -34,6 +34,7 @@
                 <div class="modal-banner" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.6) 0%, rgba(0,36,61,0.6) 50%), url('<%= image_path game.picture_file_name %>');">
                   <h1><%= game.name %></h1>
                 </div>
+
                 <div class="game-info">
                   <div>
                     <% avatar_url = game.user.facebook_picture_url || "http://placehold.it/30x30" %>
@@ -63,16 +64,16 @@
   </div>
 </div>
 
+
 <%= content_for(:after_js) do %>
  <script type="text/javascript">
   $(function () {
     $('#datetimepicker12').datetimepicker({
       inline: true,
-      sideBySide: true
+      sideBySide: true,
+      format: "D, M, YYYY, HH:mm",
+      stepping: 15
     });
   });
-</script>
+ </script>
 <% end %>
-<%# if user_signed_in? %>
-<%# link_to 'My Profile', user_path(current_user) %>
-<%# end %>
