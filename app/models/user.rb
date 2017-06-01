@@ -25,6 +25,7 @@ class User < ApplicationRecord
 
     user = User.find_by(provider: auth.provider, uid: auth.uid)
     user ||= User.find_by(email: auth.info.email) # User did a regular sign up in the past.
+
     if user
       user.update(user_params)
     else
@@ -106,6 +107,7 @@ class User < ApplicationRecord
     if self.username
     else
     self.username = self.first_name
+    self.save
     end
   end
 
