@@ -10,6 +10,17 @@
     color: $green;
   }
 }
+.btn-profile-tab {
+  margin-top: 10px;
+  // &.active {
+  // border: 1px solid $green;
+  // }
+}
+.btn-profile-tab.active {
+  background-color: $grey;
+  color: $green;
+  border: 1px solid $green;
+}
 .btn-fb {
   margin-top: 40px;
   background-color: #3B5998;

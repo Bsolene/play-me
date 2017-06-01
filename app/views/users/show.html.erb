@@ -1,6 +1,6 @@
 <!-- PROFILE INFOS -->
 
-<div class="flex-row wrap-white">
+<div class="flex-row wrap-white" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.1) 0%, rgba(0,36,61,0.5) 50%), url(<%= image_path 'new-game-background.png' %>);">
 
   <div>
     <% avatar_url = current_user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
@@ -39,13 +39,13 @@
   <!-- BUTTONS-->
 
   <div class="tabs padding-bottom">
-    <a class="tab btn btn-success" data-target="#games">
-      MY GAMES
+    <a class="tab btn btn-green btn-profile-tab" data-target="#games">
+      INBOX
     </a>
-    <a class="tab active btn btn-success" data-target="#upcoming">
+    <a class="tab btn btn-green btn-profile-tab" data-target="#upcoming">
       UPCOMING CHALLENGES
     </a>
-    <a class="tab btn btn-success" data-target="#history">
+    <a class="tab btn btn-green btn-profile-tab" data-target="#history">
       HISTORY
     </a>
   </div>
@@ -56,43 +56,42 @@
 
     <% @user.games.each do |game| %>
       <div class="list-items">
-        <div class="list-stake flex-row-center box-shadow-red">
+        <div class="list-stake flex-row-center">
           £<%= game.stake %>
         </div>
         <div class="list-game flex-row-center box-shadow-grey"  style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.3) 0%, rgba(0,36,61,0.3) 50%), url( <%= image_path game.picture_file_name %> )">
           <%= game.name %>
         </div>
-        <div class="list-status flex-row-center box-shadow-grey-right">
-            Pending
-        </div>
-        <%= link_to 'delete', game_path(game), method: :delete %>
+        <%= link_to 'X', game_path(game), method: :delete, class: "list-delete flex-row-center" %>
       </div>
 
       <% game.challenges.each do |challenge| %>
         <% if (challenge.accepted != false) && (challenge.result == nil) %>
           <div class="list-items">
-            <div class="list-content-challenge flex-row-center box-shadow-grey">
-              Challenger: <%= challenge.user.username %>
+            <div class="list-content-challenge flex-row-center">
+              <%= challenge.user.username %>
             </div>
-            <div class="list-date-blue-challenge flex-row-center box-shadow-grey">
+            <div class="list-date-blue-challenge flex-row-center">
               <%= challenge.starts_at %>
             </div>
-            <% if challenge.accepted == nil %>
-              <div class="list-accept-challenge flex-row-center">
-                <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
-                <i class="fa fa-check " aria-hidden="true"></i>
-                <% end %>
-              </div>
-              <div class="list-decline-challenge flex-row-center">
-                <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
-                  <i class="fa fa-times "></i>
-                <% end %>
-              </div>
-            <% elsif challenge.accepted == true %>
-              <div class="list-score-challenge flex-row-center box-shadow-green-right">
-                  Enter score
-              </div>
-            <% end %>
+            <div class="list-content-status flex-row-center">
+              <% if challenge.accepted == nil %>
+                <div class="list-accept-challenge flex-row-center">
+                  <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
+                  <i class="fa fa-check " aria-hidden="true"></i>
+                  <% end %>
+                </div>
+                <div class="list-decline-challenge flex-row-center">
+                  <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
+                    <i class="fa fa-times "></i>
+                  <% end %>
+                </div>
+              <% elsif challenge.accepted == true %>
+                <div class="list-score-challenge flex-row-center box-shadow-green-right">
+                    Enter score
+                </div>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>
