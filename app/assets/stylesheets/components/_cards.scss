@@ -1,11 +1,27 @@
 .home-card {
-  height: 200px;
+  height: 250px;
   flex: 0 0 33.3333%;
   background-color: white;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
   background-size: cover !important;
   color: white;
   position: relative;
+  transition: 0.5s;
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+    color: $green;
+    transform: scale(0.96);
+    opacity: 0.95;
+    border-radius: 10px;
+    transition: 0.5s;
+    .card-stake {
+      color: white;
+    }
+    .card-game-user {
+      color: white;
+    }
+  }
 }
 .card-user {
   position: absolute;
@@ -29,6 +45,9 @@
   font-size: 13px;
   font-weight: bold;
   color: $green;
+  &:hover {
+    color: white;
+  }
 }
 .card-game-name {
   font-size: 20px;
@@ -38,6 +57,9 @@
   font-size: 20px;
   font-weight: bold;
   color: $green;
+  &:hover {
+    color: white;
+  }
 }
 .no-game-msg h2 {
   text-align: center;
