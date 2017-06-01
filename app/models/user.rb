@@ -60,7 +60,11 @@ class User < ApplicationRecord
   end
 
   def percentage_of_victory
+    if @user.number_of_victory == 0
+      0
+    else
     ((number_of_victory.to_f / number_of_challenges_played) * 100).round
+    end
   end
   # LOST
   def number_of_losses_as_game_owner
@@ -76,9 +80,24 @@ class User < ApplicationRecord
   end
 
   def percentage_of_losses
+    if @user.number_of_losses == 0
+      0
+    else
     ((number_of_losses.to_f / number_of_challenges_played) * 100).round
+    end
   end
    # LOST
+
+  def number_of_challenge_as_challenger_for(game_name)
+    challenges.where(game_id: Game.where(name: game_name).pluck(:id)).where.not(result: nil).count
+  end
+  def number_of_challenge_as_game_owner_for(game_name)
+    challenges_as_game_owner.where(game_id: Game.where(name: game_name).pluck(:id)).where.not(result: nil).count
+  end
+
+  def number_of_challenge_for(game_name)
+    number_of_challenge_as_challenger_for(game_name) + number_of_challenge_as_game_owner_for(game_name)
+  end
 
 
   private
