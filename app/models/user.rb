@@ -3,12 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :games, dependent: :destroy
   has_many :challenges, dependent: :destroy#, through: :games
+  has_many :challenges_as_game_owner, through: :games, source: :challenges
   has_attachment :picture
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   validates :username, uniqueness: true
-  before_create :asign_username
+  after_create :asign_username
 
   def challenges_as_game_owner
     Challenge.where(game: games)
@@ -34,10 +35,49 @@ class User < ApplicationRecord
 
     return user
   end
+  # CHALLENGES PLAYED
+  def number_of_challenges_played_as_challenger
+    challenges.where.not(result: nil).count
+  end
 
+  def number_of_challenges_played_as_game_owner
+    challenges_as_game_owner.where.not(result: nil).count
+  end
+
+  def number_of_challenges_played
+    number_of_challenges_played_as_challenger + number_of_challenges_played_as_game_owner
+  end
+  # WIN
+  def number_of_victory_as_game_owner
+     challenges_as_game_owner.where(winner: true).count
+  end
+
+  def number_of_victory_as_challenger
+    challenges.where.not(winner: true).count
+  end
+
+  def number_of_victory
+    number_of_victory_as_game_owner + number_of_victory_as_challenger
+  end
+  # LOST
+  def number_of_losses_as_game_owner
+     challenges_as_game_owner.where(winner: false).count
+  end
+
+  def number_of_losses_as_challenger
+    challenges.where.not(winner: false).count
+  end
+
+  def number_of_losses
+    number_of_losses_as_game_owner + number_of_losses_as_challenger
+  end
   private
 
   def asign_username
+    if self.username
+    else
     self.username = self.first_name
+    end
   end
+
 end
