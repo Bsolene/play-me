@@ -22,6 +22,12 @@
 
     <h3>Challenges lost : <%= @user.number_of_losses %> / <%= @user.percentage_of_losses %>%</h3>
 
+    <% Game::GAMES.keys.each do |game_name| %>
+
+      <%= game_name %> : <%= @user.number_of_challenge_for(game_name) %>
+
+    <% end %>
+
   </div>
 
 </div>
