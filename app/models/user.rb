@@ -32,7 +32,6 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.save
     end
-
     return user
   end
   # CHALLENGES PLAYED
@@ -59,6 +58,10 @@ class User < ApplicationRecord
   def number_of_victory
     number_of_victory_as_game_owner + number_of_victory_as_challenger
   end
+
+  def percentage_of_victory
+    ((number_of_victory.to_f / number_of_challenges_played) * 100).round
+  end
   # LOST
   def number_of_losses_as_game_owner
      challenges_as_game_owner.where(winner: false).count
@@ -71,6 +74,13 @@ class User < ApplicationRecord
   def number_of_losses
     number_of_losses_as_game_owner + number_of_losses_as_challenger
   end
+
+  def percentage_of_losses
+    ((number_of_losses.to_f / number_of_challenges_played) * 100).round
+  end
+   # LOST
+
+
   private
 
   def asign_username

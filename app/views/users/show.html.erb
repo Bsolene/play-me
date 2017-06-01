@@ -18,12 +18,10 @@
   </div>
 
   <div>
-    <h3>Challenge win : <%= @user.number_of_victory %></h3>
-    <p>As a game owner : <%= @user.number_of_victory_as_game_owner %></p>
-    <p>As a challenger : <%= @user.number_of_victory_as_challenger %></p>
-    <h3>Challenges lost : <%= @user.number_of_losses %></h3>
-    <p>As a game owner : <%= @user.number_of_losses_as_game_owner %></p>
-    <p>As a challengers : <%= @user.number_of_losses_as_challenger %></p>
+    <h3>Challenge win : <%= @user.number_of_victory %> / <%= @user.percentage_of_victory %>%</h3>
+
+    <h3>Challenges lost : <%= @user.number_of_losses %> / <%= @user.percentage_of_losses %>%</h3>
+
   </div>
 
 </div>
