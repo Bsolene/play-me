@@ -60,7 +60,7 @@ class User < ApplicationRecord
   end
 
   def percentage_of_victory
-    if @user.number_of_victory == 0
+    if number_of_victory == 0
       0
     else
     ((number_of_victory.to_f / number_of_challenges_played) * 100).round
@@ -80,7 +80,7 @@ class User < ApplicationRecord
   end
 
   def percentage_of_losses
-    if @user.number_of_losses == 0
+    if number_of_losses == 0
       0
     else
     ((number_of_losses.to_f / number_of_challenges_played) * 100).round
