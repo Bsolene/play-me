@@ -7,7 +7,7 @@ class ChallengesController < ApplicationController
     @challenge.game = @game
     @challenge.user = current_user
     if @challenge.save
-      redirect_to root_path
+      redirect_to user_path(current_user)
     else
       render "games/show"
     end
