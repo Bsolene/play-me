@@ -1,5 +1,5 @@
 .modal-content {
-  border-radius: 9px;
+  border-radius: 10px;
 }
 
 .close {
@@ -9,7 +9,7 @@
 
 .modal-banner {
   text-align: center;
-  height: 26vh;
+  height: 20vh;
   /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
   display: flex;
@@ -22,12 +22,15 @@
 }
 
 .modal-header {
-  color: #6AA881;
   background-color: #6FFFA4;
   border: none;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
   text-align: center;
   padding: 6px;
+}
+
+.modal-header h4 {
+  color: #6AA881;
 }
 
 .modal-title {
@@ -40,12 +43,52 @@
 }
 
 .game-info {
-  padding: 50px;
+  position: relative;
+}
+
+.modal-user-avatar {
+  position: absolute;
+  left: 199px;
+  top: -53px;
+}
+
+.modal-user-avatar p {
+  color: #434343;
+  font-family: Phosphate Solid;
+  margin-top: 28px;
+  margin-bottom: none;
 }
 
 .modal-username {
-  text-decoration: none;
   color: #FF6E53;
   font-family: Phosphate Solid;
   font-size: 22px;
+}
+
+.form-group {
+  padding: 50px;
+  padding-bottom: 10px;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.bootstrap-datetimepicker-widget {
+  background-color: #434343;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0px 0px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.timepicker {
+  font-family: Phosphate Solid;
+  font-size: 45px;
+}
+
+.timepicker.separator{
+  padding: 5px;
+}
+
+.separator {
+  padding: 3px;
 }
