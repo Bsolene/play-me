@@ -11,7 +11,6 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   after_create :asign_username
 
-
   def challenges_as_game_owner
     Challenge.where(game: games)
   end
