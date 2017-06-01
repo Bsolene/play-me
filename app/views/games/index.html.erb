@@ -40,14 +40,21 @@
                     <% avatar_url = game.user.facebook_picture_url || "http://placehold.it/30x30" %>
                     <%= image_tag avatar_url, class: "avatar-xlarge" %>
                     <h4 class="modal-username"><%= game.user.username %></h4>
-                    <p>WHEN DO YOU WANT TO PLAY?</p>
+                    <% if game.user == current_user %>
+                      <p>LOOKS LIKE IT'S YOUR GAME..</p>
+                    <% else %>
+                      <p>WHEN DO YOU WANT TO PLAY?</p>
+                    <% end %>
                   </div>
                 </div>
                 <div style="overflow:hidden;">
-                  <div class="form-group">
-                    <%= simple_form_for [game, @challenge] do |f| %>
-                      <input class="datetimepicker12" type="hidden" name="challenge[starts_at]">
-                      <%= f.button :submit, class: 'btn-green create-challenge' %>
+                    <div class="form-group">
+                      <% if game.user == current_user %>
+                      <% else %>
+                        <%= simple_form_for [game, @challenge] do |f| %>
+                          <input class="datetimepicker12" type="hidden" name="challenge[starts_at]">
+                          <%= f.button :submit, class: 'btn-green create-challenge' %>
+                        <% end %>
                     <% end %>
                   </div>
                 </div>
