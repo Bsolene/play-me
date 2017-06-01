@@ -9,12 +9,16 @@
 
 .modal-banner {
   text-align: center;
-  height: 20vh;
+  height: 28vh;
   /* if you have a 70px navbar => height: calc(100vh - 70px); */
   background-size: cover !important;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.create-challenge {
+  margin-top: 0px !important;
 }
 
 .modal-body {
