@@ -43,11 +43,13 @@
                   <p>Challenge this player</p>
                   <p>When would you like to play?</p>
                 </div>
-                <div class="booking-form">
-                  <%= simple_form_for [game, @challenge] do |f| %>
-                    <%= f.input :starts_at %>
-                    <%= f.button :submit %>
-                  <% end %>
+                <div style="overflow:hidden;">
+                  <div class="form-group">
+
+                   <%= simple_form_for [game, @challenge] do |f| %>
+                      <input id="datetimepicker12" type="hidden" name="challenge[starts_at]">
+                      <%= f.button :submit, class: 'btn-success' %>
+                    <% end %>
                 </div>
               </div>
             </div>
@@ -60,6 +62,16 @@
 
 
 
+<%= content_for(:after_js) do %>
+ <script type="text/javascript">
+  $(function () {
+    $('#datetimepicker12').datetimepicker({
+      inline: true,
+      sideBySide: true
+    });
+  });
+</script>
+<% end %>
 <%# if user_signed_in? %>
 <%# link_to 'My Profile', user_path(current_user) %>
 <%# end %>
