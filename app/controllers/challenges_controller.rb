@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :set_challenge, only: [:mark_as_accepted, :decline]
+  before_action :set_challenge, only: [:mark_as_accepted, :decline, :update]
   before_action :set_game, only: [:create]
 
   def create
@@ -23,6 +23,16 @@ class ChallengesController < ApplicationController
     redirect_to :back
   end
 
+  def edit
+
+  end
+
+  def update
+
+    @challenge.update(challenge_params)
+    redirect_to user_path(current_user)
+
+  end
 
   private
 
@@ -36,7 +46,7 @@ class ChallengesController < ApplicationController
   end
 
   def challenge_params
-    params.require(:challenge).permit(:starts_at, :result, :accepted)
+    params.require(:challenge).permit(:starts_at, :result, :accepted, :winner)
   end
 
 end

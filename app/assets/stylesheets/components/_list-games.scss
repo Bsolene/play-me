@@ -46,12 +46,17 @@
 .list-status{
   background-color: $medium-grey;
   color: $light-grey;
-  // padding: 0 20px;
   height: 50px;
   flex: 0 0 100px;
 }
 .list-status-red{
   background-color: $red;
+  color: $light-grey;
+  height: 50px;
+  flex: 0 0 100px;
+}
+.list-status-green{
+  background-color: $green;
   color: $light-grey;
   height: 50px;
   flex: 0 0 100px;
