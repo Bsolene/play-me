@@ -17,48 +17,8 @@
     <p>As a challenger : <%= @user.number_of_challenges_played_as_challenger %></p>
   </div>
 
+  <%= render "chart" %>
 
-  <div id="container" style="width:400px; height:300px;"></div>
-  <% content_for(:after_js) do %>
-    <script>
-      $(function () {
-        var myChart = Highcharts.chart('container', {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: 'Games played'
-            },
-            tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: false
-                  },
-                  showInLegend: true
-              }
-            },
-            series: [{
-                name: 'games',
-                data: [ <% Game::GAMES.keys.each do |game_name| %>
-                {
-                  name: '<%= game_name %>',
-                  y: <%= @user.number_of_challenge_for(game_name) %>,
-                },
-                <% end %>
-                ],
-            }]
-        });
-      });
-    </script>
-  <% end %>
 
 </div>
 
