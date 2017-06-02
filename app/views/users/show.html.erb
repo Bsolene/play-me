@@ -1,4 +1,4 @@
-j<!-- PROFILE INFOS -->
+<!-- PROFILE INFOS -->
 
 <div class="wrap-white" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.1) 0%, rgba(0,36,61,0.5) 50%), url(<%= image_path 'new-game-background.png' %>);">
   <div class="profile-content text-center">
@@ -282,7 +282,15 @@ j<!-- PROFILE INFOS -->
   <div class="tab-content hidden" id="history">
 
     <h4 class="title">PAST CHALLENGES</h4>
-    TOTAL : £<%= current_user.total_money %>
+    <% if current_user.total_money < 0 %>
+      <div class="money-record negative">
+        TOTAL : £<%= current_user.total_money %>
+      </div>
+    <% else %>
+      <div class="money-record">
+        TOTAL : £<%= current_user.total_money %>
+      </div>
+    <% end %>
     <% @user.games.each do |game| %>
       <% game.challenges.each do |challenge| %>
 
