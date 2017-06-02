@@ -282,7 +282,7 @@
   <div class="tab-content hidden" id="history">
 
     <h4 class="title">PAST CHALLENGES</h4>
-
+    TOTAL : £<%= current_user.total_money %>
     <% @user.games.each do |game| %>
       <% game.challenges.each do |challenge| %>
 

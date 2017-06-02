@@ -87,8 +87,7 @@ class User < ApplicationRecord
     ((number_of_losses.to_f / number_of_challenges_played) * 100).round
     end
   end
-   # LOST
-
+   # GAMES PLAYED
   def number_of_challenge_as_challenger_for(game_name)
     challenges.where(game_id: Game.where(name: game_name).pluck(:id)).where.not(result: nil).count
   end
@@ -98,6 +97,29 @@ class User < ApplicationRecord
 
   def number_of_challenge_for(game_name)
     number_of_challenge_as_challenger_for(game_name) + number_of_challenge_as_game_owner_for(game_name)
+  end
+  # MONEY
+
+  def money_as_game_owner_to_add
+    challenges_as_game_owner.where(winner: true).map(&:game).map(&:stake).reduce(:+) || 0
+  end
+  def money_as_challenger_to_add
+    challenges.where(winner: false).map(&:game).map(&:stake).reduce(:+) || 0
+  end
+  def total_money_to_add
+    money_as_game_owner_to_add + money_as_challenger_to_add
+  end
+  def money_as_game_owner_to_sub
+    challenges_as_game_owner.where(winner: false).map(&:game).map(&:stake).reduce(:+) || 0
+  end
+  def money_as_challenger_to_sub
+    challenges.where(winner: true).map(&:game).map(&:stake).reduce(:+) || 0
+  end
+  def total_money_to_sub
+    money_as_game_owner_to_add + money_as_challenger_to_add
+  end
+  def total_money
+    total_money_to_add - total_money_to_sub
   end
 
 
