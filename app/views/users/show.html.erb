@@ -17,7 +17,7 @@
     <p>As a challenger : <%= @user.number_of_challenges_played_as_challenger %></p>
   </div>
 
-  <%= render "chart" %>
+  <%= render "users/doughnut" %>
 
 
 </div>
@@ -94,40 +94,6 @@
   <div class="tab-content" id="upcoming">
 
     <h4 class="title">PENDING</h4>
-
-    <% @user.games.each do |game| %>
-      <% game.challenges.each do |challenge| %>
-        <% if challenge.accepted == nil %>
-          <div class="list-items">
-            <div class="list-stake flex-row-center box-shadow-red">
-              £<%= challenge.game.stake %>
-            </div>
-            <div class="list-content flex-row-center box-shadow-grey">
-              <%= game.name %>
-            </div>
-            <div class="list-content flex-row-center box-shadow-grey">
-              Creator:</br> YOU
-            </div>
-            <div class="list-date flex-row-center box-shadow-grey">
-              <%= challenge.starts_at %>
-            </div>
-            <div class="list-content flex-row-center box-shadow-grey">
-              Challenger:</br> <%= challenge.user.username %>
-            </div>
-            <div class="list-accept flex-row-center">
-              <%= link_to user_mark_as_accepted_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
-              <i class="fa fa-check fa-lg" aria-hidden="true"></i>
-              <% end %>
-            </div>
-            <div class="list-decline flex-row-center">
-              <%= link_to user_decline_path(user_id: current_user.id, id: challenge.id), method: :patch do %>
-                <i class="fa fa-times fa-lg"></i>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
 
     <% @user.challenges.each do |challenge| %>
       <% if challenge.accepted == nil %>
