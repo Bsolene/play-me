@@ -37,7 +37,7 @@
 
                   <div class="game-info text-center">
                     <div class="modal-user-avatar">
-                      <% avatar_url = game.user.facebook_picture_url || "http://placehold.it/30x30" %>
+                      <% avatar_url = game.user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
                       <%= image_tag avatar_url, class: "avatar-xlarge" %>
                       <h4 class="modal-username"><%= game.user.username %></h4>
                       <% if game.user == current_user %>
