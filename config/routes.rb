@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   root to: 'games#index'
   resources :games do
     resources :challenges, only: [:create, :delete]
-    patch '/hide', to: 'games#hide'
+
   end
   resources :users, only: [:show, :update] do
     patch '/mark-as-accepted', to: 'challenges#mark_as_accepted'
     patch '/decline', to: 'challenges#decline'
     resources :challenges, only: [:update]
+    patch '/hide', to: 'games#hide'
 
   end
   get 'search', to: 'games#search'

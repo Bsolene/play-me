@@ -59,7 +59,7 @@ class GamesController < ApplicationController
     end
   end
 
-   def hide
+  def hide
     @game.update(hidden: true)
     redirect_to :back
   end
