@@ -1,28 +1,75 @@
-<canvas id="myChart" width="100" height="100"></canvas>
+<div class="canvas-container">
+  <canvas id="victories"></canvas>
+</div>
+<div class="canvas-container">
+  <canvas id="myChart"></canvas>
+</div>
 
 <% content_for(:after_js) do %>
+  <% array = [] %>
+  <% values = [] %>
+  <% Game::GAMES.keys.each do |game_name| %>
+    <% array << "#{game_name}" %>
+     <%values << @user.number_of_challenge_for(game_name) %>
+  <% end %>
 
-
+  <% my_value = [] %>
+  <% my_value << @user.number_of_victory %>
+  <% my_value << @user.number_of_losses %>
   <script>
 
-     new Chart(document.getElementById("myChart"), {
-        type: 'doughnut',
-        data: {
-          labels: <%= Game::GAMES.keys.map{ |game_name| game_name } %>,
-          datasets: [
-            {
-              label: "Population (millions)",
-              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-              data: <%= Game::GAMES.keys.map{ |game_name| @user.number_of_challenge_for(game_name) } %>,
-            }
-          ]
-        },
-        options: {
-          title: {
-            display: true,
-            text: 'Predicted world population (millions) in 2050'
+    new Chart(document.getElementById("myChart"), {
+      type: 'doughnut',
+      data: {
+        labels: <%= raw array %>,
+        datasets: [
+          {
+            label: "Population (millions)",
+            backgroundColor: ["#FDB631", "#E67E22","#75FFA7","#89DBF6","#FF6F59", "#D8D8D8", "#434343"],
+            data: <%= raw values %>,
           }
+        ]
+      },
+      options: {
+        legend: {
+          display : false
+        },
+        title: {
+          display: true,
+          fontSize: 22,
+          fontFamily: "Avenir",
+          fontColor: "#F3F3F3",
+          text: 'Games played'
         }
+      }
+    });
+
+
+
+    new Chart(document.getElementById("victories"), {
+      type: 'doughnut',
+      data: {
+        labels: ["Won", "Lost"],
+        datasets: [
+          {
+            label: "Population (millions)",
+            backgroundColor: ["#75FFA7","#FF6F59"],
+            data: <%= raw my_value %>,
+          }
+        ]
+      },
+      options: {
+        legend: {
+          display : false
+        },
+        title: {
+          display: true,
+          fontSize: 22,
+          fontFamily: "Avenir",
+          fontColor: "#F3F3F3",
+          text: 'Win %'
+        }
+      }
     });
 
   </script>
