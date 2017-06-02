@@ -40,6 +40,13 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+  font-family: $block-font;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: $green;
+  &:hover {
+    color: white;
+  }
 }
 .card-game-user {
   font-size: 13px;
@@ -52,14 +59,6 @@
 .card-game-name {
   font-size: 20px;
   font-weight: bold;
-}
-.card-stake {
-  font-size: 20px;
-  font-weight: bold;
-  color: $green;
-  &:hover {
-    color: white;
-  }
 }
 .no-game-msg h2 {
   text-align: center;
