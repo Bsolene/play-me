@@ -42,13 +42,41 @@
     <%= cl_image_tag("playME-logo_gil74m.png") %>
   </a>
 
+  <%= form_tag games_path, method: :get, class: "navbar-wagon-search text-center" do %>
+    <%= text_field_tag :name, nil, class: "navbar-wagon-search-input", placeholder: "search for a game" %>
+    <button type="submit" class="navbar-wagon-search-btn">
+      <i class="fa fa-search"></i>
+    </button>
+  <% end %>
+
   <div class="navbar-wagon-item">
     <div class="dropdown">
-      <i class="fa fa-bars dropdown-toggle" data-toggle="dropdown"></i>
+      <i class="fa fa-user dropdown-toggle" data-toggle="dropdown"></i>
       <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-        <li><a href="#">Some mobile link</a></li>
-        <li><a href="#">Other one</a></li>
-        <li><a href="#">Other one</a></li>
+        <% if user_signed_in? %>
+          <div class="link-title link-title-mobile">
+            <%= link_to user_path(current_user) do %>
+              <span>pro</span><span>file</span>
+            <% end %>
+          </div>
+          <div class="link-title link-title-mobile">
+            <%= link_to destroy_user_session_path, method: :delete do %>
+              <span>log</span><span>out</span>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="link-title link-title-mobile">
+            <%= link_to new_user_registration_path do %>
+              <span>sign</span><span>up</span>
+            <% end %>
+          </div>
+          <div class="link-title link-title-mobile">
+            <%= link_to user_session_path do %>
+              <span>log</span><span>in</span>
+            <% end %>
+          </div>
+
+        <% end %>
       </ul>
     </div>
   </div>
