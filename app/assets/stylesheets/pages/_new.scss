@@ -19,3 +19,14 @@
   padding: 12px 0px;
   text-align: center;
 }
+.money-record {
+  text-align: center;
+  font-family: $block-font;
+  font-size: 35px;
+  margin: 10px auto;
+  letter-spacing: 4px;
+  color: $green;
+}
+.negative {
+  color: $red;
+}
