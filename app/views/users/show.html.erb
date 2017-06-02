@@ -1,4 +1,4 @@
-<!-- PROFILE INFOS -->
+j<!-- PROFILE INFOS -->
 
 <div class="wrap-white" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.1) 0%, rgba(0,36,61,0.5) 50%), url(<%= image_path 'new-game-background.png' %>);">
   <div class="profile-content text-center">
@@ -93,7 +93,7 @@
                         <div class="booking-form">
                           <%= simple_form_for [@user, @game, challenge], method: :patch do |f|  %>
                             <%= f.input :result, label: "put your score first e.g. 2-0" %>
-                            <%= f.collection_radio_buttons :winner, [[true, 'i won'], [false, 'i lost']], :first, :last, class: "btn-won-lost" %>
+                            <%= f.collection_radio_buttons :winner, [[true, 'i won'], [false, 'i lost']], :first, :last %>
                             <br>
                             <%= f.button :submit, 'submit', class: "btn-score" %>
                           <% end %>
