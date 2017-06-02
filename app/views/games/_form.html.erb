@@ -2,6 +2,7 @@
   <%= simple_form_for @game do |f| %>
     <%= f.input :name, collection: Game::GAMES.keys.sort, label: 'game' %>
     <%= f.input :stake %>
+    <%= f.hidden_field :hidden, value: false %>
     <%= f.button :submit, class: 'btn-success' %>
   <% end %>
 
