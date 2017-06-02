@@ -41,6 +41,8 @@
 
 .flex-row-centered {
   display: flex;
+  align-items: center;
+  justify-content: center;
   justify-content: space-between;
 
 }
@@ -49,3 +51,18 @@
   font-family: $block-font;
   margin-bottom: 14px;
 }
+
+.donut-right {
+  margin-top: 24px;
+  margin-right: 180px;
+  height: 250px;
+  width: 250px;
+}
+
+.donut-left {
+  margin-top: 24px;
+  margin-left: 180px;
+  height: 250px;
+  width: 250px;
+}
+

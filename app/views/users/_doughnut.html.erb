@@ -1,9 +1,4 @@
-<div class="canvas-container">
-  <canvas id="victories"></canvas>
-</div>
-<div class="canvas-container">
-  <canvas id="myChart"></canvas>
-</div>
+
 
 <% content_for(:after_js) do %>
   <% array = [] %>
@@ -17,6 +12,8 @@
   <% my_value << @user.number_of_victory %>
   <% my_value << @user.number_of_losses %>
   <script>
+
+  Chart.defaults.global.elements.arc.borderWidth = 0;
 
     new Chart(document.getElementById("myChart"), {
       type: 'doughnut',
@@ -35,7 +32,7 @@
           display : false
         },
         title: {
-          display: false,
+          display: false
         }
       }
     });
