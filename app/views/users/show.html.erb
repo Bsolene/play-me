@@ -86,15 +86,15 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Enter the score</h4>
+                        <h4 class="modal-title">enter score</h4>
                       </div>
                       <div class="modal-body">
-                        <p>Always enter your score first. Exemple "2-0"</p>
                         <div class="booking-form">
                           <%= simple_form_for [@user, @game, challenge], method: :patch do |f|  %>
-                            <%= f.input :result %>
-                            <%= f.collection_radio_buttons :winner, [[true, 'Me'] ,[false, 'Opponent']], :first, :last %>
-                            <%= f.button :submit, 'Send score!' %>
+                            <%= f.input :result, label: "put your score first e.g. 2-0" %>
+                            <%= f.collection_radio_buttons :winner, [[true, 'i won'], [false, 'i lost']], :first, :last, class: "btn-won-lost" %>
+                            <br>
+                            <%= f.button :submit, 'submit', class: "btn-score" %>
                           <% end %>
                         </div>
                       </div>
@@ -119,7 +119,7 @@
     <% @user.challenges.each do |challenge| %>
       <% if challenge.accepted == nil %>
         <div class="list-items">
-          <div class="list-stake-upcoming flex-row-center">
+          <div class="list-stake list-stake-upcoming flex-row-center">
             £<%= challenge.game.stake %>
           </div>
           <div class="list-content list-content-title flex-row-center box-shadow-grey">
@@ -128,14 +128,14 @@
           <div class="list-content flex-row-center box-shadow-grey">
             <%= challenge.game.user.username %>
           </div>
-          <div class="list-date flex-row-center box-shadow-grey">
+          <div class="list-date-blue flex-row-center box-shadow-grey">
             <%= challenge.starts_at.strftime("%e %b @ %l:%M %p") %>
           </div>
           <div class="list-content flex-row-center box-shadow-grey">
             vs you
           </div>
-          <div class="list-status flex-row-center">
-            Pending
+          <div class="list-status-grey flex-row-center box-shadow-grey-right">
+            pending
           </div>
         </div>
       <% end %>
@@ -156,7 +156,7 @@
             <div class="list-content flex-row-center box-shadow-grey">
               you
             </div>
-            <div class="list-date-blue flex-row-center box-shadow-grey">
+            <div class="list-date-green flex-row-center box-shadow-grey">
               <%= challenge.starts_at.strftime("%e %b @ %l:%M %p") %>
             </div>
             <div class="list-content flex-row-center box-shadow-grey">
@@ -174,15 +174,15 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Enter the score</h4>
+                    <h4 class="modal-title">enter score</h4>
                   </div>
                   <div class="modal-body">
-                    <p>Always enter your score first. Exemple "2-0"</p>
                     <div class="booking-form">
                       <%= simple_form_for [@user, @game, challenge], method: :patch do |f|  %>
-                        <%= f.input :result %>
-                        <%= f.collection_radio_buttons :winner, [[true, 'Me'] ,[false, 'Opponent']], :first, :last %>
-                        <%= f.button :submit, 'Send score!' %>
+                        <%= f.input :result, label: "put your score first e.g. 2-0" %>
+                        <%= f.collection_radio_buttons :winner, [[true, 'i won'], [false, 'i lost']], :first, :last %>
+                        <br>
+                        <%= f.button :submit, 'submit', class: "btn-score" %>
                       <% end %>
                     </div>
                   </div>
@@ -207,15 +207,15 @@
             <%= challenge.game.name %>
           </div>
           <div class="list-content flex-row-center box-shadow-grey">
-            Creator:</br> <%= challenge.game.user.username %>
+            <%= challenge.game.user.username %>
           </div>
           <div class="list-date-blue flex-row-center box-shadow-grey">
             <%= challenge.starts_at.strftime("%e %b @ %l:%M %p") %>
           </div>
           <div class="list-content flex-row-center box-shadow-grey">
-            Challenger:</br> you
+            vs you
           </div>
-          <div class="list-score flex-row-center box-shadow-green-right">Waiting for score..</div>
+          <div class="list-score flex-row-center box-shadow-green-right">awaiting score..</div>
         </div>
       <% end %>
     <% end %>
@@ -233,16 +233,16 @@
               <%= game.name %>
             </div>
             <div class="list-content flex-row-center box-shadow-grey">
-              Creator:</br> you
+              you
             </div>
             <div class="list-date flex-row-center box-shadow-grey">
               <%= challenge.starts_at.strftime("%e %b @ %l:%M %p") %>
             </div>
             <div class="list-content flex-row-center box-shadow-grey">
-              Challenger:</br> <%= challenge.user.username %>
+              vs <%= challenge.user.username %>
             </div>
-            <div class="list-status-red flex-row-center box-shadow-red-right">
-              Rejected
+            <div class="list-score-red flex-row-center box-shadow-red-right">
+              rejected
             </div>
           </div>
         <% end %>
@@ -252,23 +252,23 @@
     <% @user.challenges.each do |challenge| %>
       <% if challenge.accepted == false %>
         <div class="list-items">
-          <div class="list-stake flex-row-center">
+          <div class="list-stake list-stake-upcoming flex-row-center">
             £<%= challenge.game.stake %>
           </div>
           <div class="list-content list-content-title flex-row-center box-shadow-grey">
             <%= challenge.game.name %>
           </div>
           <div class="list-content flex-row-center box-shadow-grey">
-            Creator:</br> <%= challenge.game.user.username %>
+            <%= challenge.game.user.username %>
           </div>
           <div class="list-date flex-row-center box-shadow-grey">
             <%= challenge.starts_at.strftime("%e %b @ %l:%M %p") %>
           </div>
           <div class="list-content flex-row-center box-shadow-grey">
-            Challenger:</br> you
+            vs you
           </div>
-          <div class="list-status-red flex-row-center box-shadow-red-right">
-            Rejected
+          <div class="list-score-red flex-row-center box-shadow-red-right">
+            rejected
           </div>
         </div>
       <% end %>
@@ -280,7 +280,7 @@
 <!-- RECORD SECTION-->
   <div class="tab-content hidden" id="history">
 
-    <h4 class="title">ALL MY PAST CHALLENGES</h4>
+    <h4 class="title">PAST CHALLENGES</h4>
 
     <% @user.games.each do |game| %>
       <% game.challenges.each do |challenge| %>
@@ -319,7 +319,7 @@
     <% @user.challenges.each do |challenge| %>
       <% if (challenge.accepted == true) && (challenge.result != nil) %>
         <div class="list-items">
-          <div class="list-stake-blue flex-row-center box-shadow-blue">
+          <div class="list-stake list-stake-upcoming flex-row-center">
             £<%= challenge.game.stake %>
           </div>
           <div class="list-content list-content-title flex-row-center box-shadow-grey">
