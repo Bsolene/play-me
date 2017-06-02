@@ -1,0 +1,29 @@
+<canvas id="myChart" width="100" height="100"></canvas>
+
+<% content_for(:after_js) do %>
+
+
+  <script>
+
+     new Chart(document.getElementById("myChart"), {
+        type: 'doughnut',
+        data: {
+          labels: <%= Game::GAMES.keys.map{ |game_name| game_name } %>,
+          datasets: [
+            {
+              label: "Population (millions)",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              data: <%= Game::GAMES.keys.map{ |game_name| @user.number_of_challenge_for(game_name) } %>,
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Predicted world population (millions) in 2050'
+          }
+        }
+    });
+
+  </script>
+<% end %>
