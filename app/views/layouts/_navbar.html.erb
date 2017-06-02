@@ -42,12 +42,13 @@
     <%= cl_image_tag("playME-logo_gil74m.png") %>
   </a>
 
-  <%= form_tag games_path, method: :get, class: "navbar-wagon-search text-center" do %>
-    <%= text_field_tag :name, nil, class: "navbar-wagon-search-input", placeholder: "search for a game" %>
+  <%= form_tag games_path, method: :get, class: "navbar-wagon-search-mobile text-center" do %>
+    <%= text_field_tag :name, nil, class: "navbar-wagon-search-input-mobile", placeholder: "search for a game" %>
     <button type="submit" class="navbar-wagon-search-btn">
       <i class="fa fa-search"></i>
     </button>
   <% end %>
+
 
   <div class="navbar-wagon-item">
     <div class="dropdown">
