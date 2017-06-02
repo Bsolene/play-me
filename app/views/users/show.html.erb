@@ -18,13 +18,15 @@
     </div>
   </div>
   <div class="flex-row-centered">
-    <div class="donut-left">
-      <canvas id="victories"></canvas>
-    </div>
-    <div class="donut-right">
-      <canvas id="myChart"></canvas>
-    </div>
-    <%= render "users/doughnut" %>
+    <% if current_user.number_of_challenges_played != 0 %>
+      <div class="donut-left">
+        <canvas id="victories"></canvas>
+      </div>
+      <div class="donut-right">
+        <canvas id="myChart"></canvas>
+      </div>
+      <%= render "users/doughnut" %>
+    <% end %>
   </div>
 </div>
 
