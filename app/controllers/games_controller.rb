@@ -60,8 +60,12 @@ class GamesController < ApplicationController
   end
 
   def hide
-    @game.update(hidden: true)
-    redirect_to :back
+    if @game.update(hidden: true)
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js  # <-- will render `app/views/reviews/create.js.erb`
+      end
+    end
   end
 
   private
