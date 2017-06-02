@@ -1,25 +1,25 @@
 <!-- PROFILE INFOS -->
 
-<div class="flex-row wrap-white" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.1) 0%, rgba(0,36,61,0.5) 50%), url(<%= image_path 'new-game-background.png' %>);">
+<div class="wrap-white" style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.1) 0%, rgba(0,36,61,0.5) 50%), url(<%= image_path 'new-game-background.png' %>);">
+  <div class="profile-content text-center">
+    <div class="profile-user-avatar">
+      <% avatar_url = current_user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
+      <%= image_tag avatar_url, class: "avatar-xlarge" %>
+    </div>
 
-  <div>
-    <% avatar_url = current_user.facebook_picture_url || "http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/8af1db7e-f861-453e-aaca-fcb3fd76bcd1/md/2105229-1445707652129-MNOyFyi.png" %>
-    <%= image_tag avatar_url, class: "avatar-xlarge" %>
+
+    <div class="profile-username">
+      <h3 class="profile-page-username"><%= @user.username %></h3>
+      <div class="btn-edit-user">
+        <%= link_to edit_user_registration_path do %>
+          <h3 class="fa fa-pencil"></h3>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="wrap-infos">
-
-    <h3><%= @user.username %></h3>
-    <h5><%= @user.email %></h5>
-    <%= link_to 'Reset', edit_user_registration_path %>
-    <h3>Number of challenge played : <%= @user.number_of_challenges_played %></h3>
-    <p>As a game owner : <%= @user.number_of_challenges_played_as_game_owner %></p>
-    <p>As a challenger : <%= @user.number_of_challenges_played_as_challenger %></p>
+  <div class="flex-row-centered">
+    <%= render "users/doughnut" %>
   </div>
-
-  <%= render "users/doughnut" %>
-
-
 </div>
 
  <!-- GAMES BOARD -->
