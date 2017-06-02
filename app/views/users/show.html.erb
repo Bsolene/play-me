@@ -45,16 +45,17 @@
   <div class="tab-content hidden " id="games">
 
     <% @user.games.each do |game| %>
-      <div class="hide-me list-items">
-        <div class="list-stake flex-row-center">
-          £<%= game.stake %>
+      <% if game.hidden == false %>
+        <div class="list-items" data-game-id="<%= game.id %>">
+          <div class="list-stake flex-row-center">
+            £<%= game.stake %>
+          </div>
+          <div class="list-game flex-row-center box-shadow-grey"  style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.3) 0%, rgba(0,36,61,0.3) 50%), url( <%= image_path game.picture_file_name %> )">
+            <%= game.name %>
+          </div>
+          <%= link_to 'X', user_hide_path(user_id: current_user.id, id: game.id), method: :patch, remote: true, class: "list-delete flex-row-center" %>
         </div>
-        <div class="list-game flex-row-center box-shadow-grey"  style="background-image: linear-gradient(-225deg, rgba(67,67,67,0.3) 0%, rgba(0,36,61,0.3) 50%), url( <%= image_path game.picture_file_name %> )">
-          <%= game.name %>
-        </div>
-        <%= link_to 'X', user_hide_path(user_id: current_user.id, id: game.id), method: :patch, class: "list-delete flex-row-center" %>
-
-      </div>
+      <% end %>
 
       <% game.challenges.each do |challenge| %>
         <% if (challenge.accepted != false) && (challenge.result == nil) %>
