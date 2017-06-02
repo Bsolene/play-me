@@ -116,7 +116,7 @@ class User < ApplicationRecord
     challenges.where(winner: true).map(&:game).map(&:stake).reduce(:+) || 0
   end
   def total_money_to_sub
-    money_as_game_owner_to_add + money_as_challenger_to_add
+    money_as_game_owner_to_sub + money_as_challenger_to_sub
   end
   def total_money
     total_money_to_add - total_money_to_sub
