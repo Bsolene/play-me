@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :hide]
   skip_before_action :authenticate_user!, only: [:index, :search, :show]
 
   def search
@@ -59,6 +59,11 @@ class GamesController < ApplicationController
     end
   end
 
+   def hide
+    @game.update(hidden: true)
+    redirect_to :back
+  end
+
   private
 
   def set_game
@@ -66,7 +71,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :picture, :stake)
+    params.require(:game).permit(:name, :picture, :stake, :hidden)
   end
 
 end

@@ -28,10 +28,8 @@ class ChallengesController < ApplicationController
   end
 
   def update
-
     @challenge.update(challenge_params)
     redirect_to user_path(current_user)
-
   end
 
   private
